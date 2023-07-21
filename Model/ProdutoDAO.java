@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model;
+import Connection.ConnectionFactory;
+import java.sql.*;
 
 /**
  *
@@ -10,4 +12,37 @@ package Model;
  */
 public class ProdutoDAO {
     
+    // criando o metodo de salvar informações no banco de dados
+    public void save(ProdutoModel Produto){
+        // statement pra executar na query e adicionar os valores
+        String sql = "INSERT INTO produtos (codigo, valor) VALUES (?, ?) ";
+        
+        Connection con = null;
+        PreparedStatement pstm = null;
+        
+        try{
+            con = ConnectionFactory.createConnectionToMySQL();
+            //instanciar a conexão
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, Produto.getCodigo_Produto());
+            pstm.setDouble(2, Produto.getValor_Produto());
+            
+            pstm.execute();
+            
+            
+        } catch(Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                if(pstm !=null){
+                    pstm.close();
+                }
+                if(con !=null){
+                    con.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        }        
+    }
 }
