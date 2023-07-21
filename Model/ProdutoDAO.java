@@ -15,7 +15,7 @@ public class ProdutoDAO {
     // criando o metodo de salvar informações no banco de dados
     public void save(ProdutoModel Produto){
         // statement pra executar na query e adicionar os valores
-        String sql = "INSERT INTO produtos (codigo, valor) VALUES (?, ?) ";
+        String sql = "INSERT INTO produtos (nome, codigo, valor) VALUES (?, ?, ?) ";
         
         Connection con = null;
         PreparedStatement pstm = null;
@@ -24,9 +24,9 @@ public class ProdutoDAO {
             con = ConnectionFactory.createConnectionToMySQL();
             //instanciar a conexão
             pstm = con.prepareStatement(sql);
-            pstm.setInt(1, Produto.getCodigo_Produto());
-            pstm.setDouble(2, Produto.getValor_Produto());
-            
+            pstm.setString(1, Produto.getNome_produto());
+            pstm.setInt(2, Produto.getCodigo_Produto());
+            pstm.setDouble(3, Produto.getValor_Produto());
             pstm.execute();
             
             
