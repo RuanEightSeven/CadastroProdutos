@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package cadastroitens_testedao;
-
+import Connection.ConnectionFactory;
 import Model.ProdutoDAO;
 import Model.ProdutoModel;
 import View.CadastroProduto;

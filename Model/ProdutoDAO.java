@@ -5,6 +5,8 @@
 package Model;
 import Connection.ConnectionFactory;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -45,4 +47,45 @@ public class ProdutoDAO {
             }
         }        
     }
+        public List<ProdutoModel> getProdutos() throws Exception {
+            
+            Connection con = null;
+            PreparedStatement pstm = null;
+            ResultSet rset = null;
+            
+            
+            List<ProdutoModel> produtos = new ArrayList<>();
+            // iniciando a comunicação
+            try{
+                
+            con = ConnectionFactory.createConnectionToMySQL();
+            pstm = con.prepareStatement("SELECT * FROM produto");
+            rset = pstm.executeQuery();
+            
+            while(rset.next()){
+                
+                ProdutoModel produto = new ProdutoModel();
+                
+                produto.setNome_produto(rset.getString("nome"));
+                produto.setCodigo_Produto(rset.getInt("codigo"));
+                produto.setValor_Produto(rset.getDouble("valor"));
+                produtos.add(produto);
+                
+            }
+            } catch(SQLException ex){
+               
+            }finally{
+                try{
+                if(pstm !=null){
+                    pstm.close();
+                }
+                if(con !=null){
+                    con.close();
+                }
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            }
+            return produtos;
+        }
 }
