@@ -4,6 +4,8 @@
  */
 package cadastroitens_testedao;
 
+import Model.ProdutoDAO;
+import Model.ProdutoModel;
 import View.CadastroProduto;
 
 /**

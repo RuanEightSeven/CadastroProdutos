@@ -4,6 +4,9 @@
  */
 package View;
 
+import Model.ProdutoDAO;
+import Model.ProdutoModel;
+
 /**
  *
  * @author 55119
@@ -166,13 +169,21 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
-        String novo_nome = campo_nome.getText();
-        int novo_codigo = Integer.parseInt(campo_codigo.getText());
-        double novo_valor = Double.parseDouble(campo_valor.getText());
-        System.out.println(novo_nome);
-        System.out.println(novo_codigo);
-        System.out.println(novo_valor);
         
+        
+        try{
+        ProdutoDAO ProdutoDAO = new ProdutoDAO();
+        ProdutoModel Produto = new ProdutoModel();
+        
+        //Obtendo os valores para o produto de acordo com o valor inserido pelo usuario, adequando o formato
+        Produto.setNome_produto(campo_nome.getText());
+        Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
+        Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
+        
+        ProdutoDAO.save(Produto);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
