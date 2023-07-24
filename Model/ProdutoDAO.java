@@ -45,6 +45,33 @@ public class ProdutoDAO {
             }
         }        
     }
+    public void delete(ProdutoModel Produto){
+       
+        
+        Connection con = null;
+        PreparedStatement pstm = null;
+        
+        try{
+            String sql = "DELETE FROM produtos WHERE codigo = ?";
+            con = ConnectionFactory.createConnectionToMySQL();
+            pstm = con.prepareStatement(sql);
+            pstm.setInt(1, Produto.getCodigo_Produto());
+            pstm.execute();
+            
+        }catch(Exception e){
+            
+        }finally{
+            try{
+                if(pstm !=null){
+                    pstm.close();
+                }
+                if(con !=null){
+                    con.close();
+                }
+            }catch(SQLException e){
+            }
+        }
+    }
         public List<ProdutoModel> getProdutos()  {
             
             Connection con = null;
