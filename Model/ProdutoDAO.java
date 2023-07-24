@@ -33,7 +33,6 @@ public class ProdutoDAO {
             
             
         } catch(Exception e){
-            e.printStackTrace();
         }finally{
             try{
                 if(pstm !=null){
@@ -42,24 +41,23 @@ public class ProdutoDAO {
                 if(con !=null){
                     con.close();
                 }
-            }catch(Exception e){
-                e.printStackTrace();
+            }catch(SQLException e){
             }
         }        
     }
-        public List<ProdutoModel> getProdutos() throws Exception {
+        public List<ProdutoModel> getProdutos()  {
             
             Connection con = null;
             PreparedStatement pstm = null;
             ResultSet rset = null;
             
             
-            List<ProdutoModel> produtos = new ArrayList<>();
+            ArrayList<ProdutoModel> produtos = new ArrayList<>();
             // iniciando a comunicação
             try{
-                
+            String sql = "SELECT * FROM produtos";
             con = ConnectionFactory.createConnectionToMySQL();
-            pstm = con.prepareStatement("SELECT * FROM produto");
+            pstm = (PreparedStatement) con.prepareStatement(sql);
             rset = pstm.executeQuery();
             
             while(rset.next()){
@@ -72,7 +70,7 @@ public class ProdutoDAO {
                 produtos.add(produto);
                 
             }
-            } catch(SQLException ex){
+            } catch(Exception ex){
                
             }finally{
                 try{
@@ -82,8 +80,7 @@ public class ProdutoDAO {
                 if(con !=null){
                     con.close();
                 }
-            }catch(Exception e){
-                e.printStackTrace();
+            }catch(SQLException e){
             }
             }
             return produtos;

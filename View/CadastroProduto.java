@@ -6,8 +6,10 @@ package View;
 import Connection.ConnectionFactory;
 import Model.ProdutoDAO;
 import Model.ProdutoModel;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,22 +21,25 @@ public class CadastroProduto extends javax.swing.JFrame {
     /**
      * Creates new form CadastroProduto
      */
-    public CadastroProduto() throws Exception {
+    public CadastroProduto()  {
         initComponents();
+        setLocationRelativeTo(null);
+        DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
         lerJTable();
     }
-    public void lerJTable() throws Exception{
+    public void lerJTable() {
         DefaultTableModel modelo = (DefaultTableModel) jTProdutos.getModel();
-        
+        modelo.setNumRows(0);
         ProdutoDAO pdao = new ProdutoDAO();
         
-        for(ProdutoModel p: pdao.getProdutos()){
-            modelo.addRow(new Object[]{
+         for (ProdutoModel p: pdao.getProdutos()){  
+             modelo.addRow(new Object[]{
                 p.getNome_produto(),
                 p.getCodigo_Produto(),
                 p.getValor_Produto()
             });
-        }
+         }
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -59,6 +64,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         campo_nome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTProdutos = new javax.swing.JTable();
 
@@ -139,16 +145,30 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         jTProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Nome", "codigo", "valor"
             }
         ));
         jScrollPane1.setViewportView(jTProdutos);
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
+                .addContainerGap(369, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(94, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -170,9 +190,9 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(126, 126, 126)
                         .addComponent(jButton1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(612, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,9 +214,9 @@ public class CadastroProduto extends javax.swing.JFrame {
                         .addGap(31, 31, 31)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(521, Short.MAX_VALUE))
         );
 
         pack();
@@ -221,6 +241,14 @@ public class CadastroProduto extends javax.swing.JFrame {
         
         ProdutoDAO.save(Produto);
         lerJTable();
+        //confirmação do cadastro
+        JOptionPane.showMessageDialog(rootPane, "salvo");
+        
+        //zerar campos para novo cadastro
+        campo_nome.setText("");
+        campo_codigo.setText("");
+        campo_valor.setText("");
+        
         }catch(NumberFormatException e){
         } catch (Exception ex) {
             Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
@@ -256,6 +284,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 try {
                     new CadastroProduto().setVisible(true);
@@ -267,7 +296,7 @@ public class CadastroProduto extends javax.swing.JFrame {
             }
         });
     }
-    
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField campo_codigo;
     private javax.swing.JTextField campo_nome;
@@ -283,6 +312,7 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JOptionPane jOptionPane1;
+    private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTProdutos;
     // End of variables declaration//GEN-END:variables
