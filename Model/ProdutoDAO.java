@@ -72,6 +72,37 @@ public class ProdutoDAO {
             }
         }
     }
+    
+    public void atualizar(ProdutoModel Produto){
+        
+        Connection con = null;
+        PreparedStatement pstm = null;
+        
+        try{
+            String sql = "UPDATE produtos set nome = ?, valor = ?  WHERE codigo = ?";
+            con = ConnectionFactory.createConnectionToMySQL();
+            pstm = con.prepareStatement(sql);
+            pstm.setString(1, Produto.getNome_produto());
+            pstm.setDouble(2, Produto.getValor_Produto());
+            pstm.setInt(3, Produto.getCodigo_Produto());
+            pstm.execute();
+            
+            
+        }catch(Exception e){
+            
+        }finally{
+            try{
+                if(pstm !=null){
+                    pstm.close();
+                }
+                if(con !=null){
+                    con.close();
+                }
+            }catch(SQLException e){
+            }
+        }
+    }
+    
         public List<ProdutoModel> getProdutos()  {
             
             Connection con = null;

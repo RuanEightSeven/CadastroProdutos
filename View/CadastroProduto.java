@@ -318,19 +318,23 @@ public class CadastroProduto extends javax.swing.JFrame {
         Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
         Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
         
-        ProdutoDAO.save(Produto);
-        lerJTable();
+        
         //confirmação do cadastro
+        if ((Integer.parseInt(campo_codigo.getText()) == 0)) {
+            JOptionPane.showMessageDialog(null, "codigo inválido");
+            ProdutoDAO.save(Produto);
+            lerJTable();
+        }else{
         JOptionPane.showMessageDialog(rootPane, "salvo");
         
         //zerar campos para novo cadastro
         campo_nome.setText("");
         campo_codigo.setText("");
         campo_valor.setText("");
-        
+        lerJTable();
+        }
         }catch(NumberFormatException e){
-        } catch (Exception ex) {
-            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "numberformatException");
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
@@ -342,9 +346,14 @@ public class CadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
         //teste de recebimento do valor de codigo para alteração
        System.out.println(campo_codigo.getText());
-       
-            
-            
+       ProdutoModel Produto = new ProdutoModel();
+       ProdutoDAO produtoDAO = new ProdutoDAO();
+       Produto.setNome_produto(campo_nome.getText());
+       Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
+       Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
+       produtoDAO.atualizar(Produto);
+       JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
+       lerJTable();
             
     }//GEN-LAST:event_jButton2MouseClicked
 
