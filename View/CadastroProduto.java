@@ -135,6 +135,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         jLabel3.setText("Insira a descrição:");
 
         jButton1.setText("Cadastrar");
+        jButton1.setPreferredSize(new java.awt.Dimension(75, 25));
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
@@ -189,19 +190,18 @@ public class CadastroProduto extends javax.swing.JFrame {
         jPanelLayout.setHorizontalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
         jPanelLayout.setVerticalGroup(
             jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
+            .addGroup(jPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         jButton2.setText("Alterar");
+        jButton2.setPreferredSize(new java.awt.Dimension(75, 25));
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton2MouseClicked(evt);
@@ -209,6 +209,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         });
 
         jButton3.setText("Excluir");
+        jButton3.setPreferredSize(new java.awt.Dimension(75, 25));
         jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton3MouseClicked(evt);
@@ -247,12 +248,12 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 84, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -270,19 +271,19 @@ public class CadastroProduto extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
                             .addComponent(campo_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(campo_codigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
                             .addComponent(campo_valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 11, Short.MAX_VALUE))
         );
 
@@ -296,6 +297,12 @@ public class CadastroProduto extends javax.swing.JFrame {
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         
+        if ( campo_codigo.isEditable() == false){
+            campo_codigo.setEditable(true);
+            campo_nome.setText("");
+            campo_codigo.setText("");
+            campo_valor.setText("");
+        }else{
         
         try{
         ProdutoDAO ProdutoDAO = new ProdutoDAO();
@@ -306,39 +313,58 @@ public class CadastroProduto extends javax.swing.JFrame {
         Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
         Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
         
-        
+       
         //confirmação do cadastro
-        if ((Integer.parseInt(campo_codigo.getText()) == 0)) {
+        if ((Integer.parseInt(campo_codigo.getText()) == 0) || (campo_codigo.getText()) == null) {
             JOptionPane.showMessageDialog(null, "codigo inválido");
-            ProdutoDAO.save(Produto);
             lerJTable();
         }else{
-        JOptionPane.showMessageDialog(rootPane, "salvo");
+        JOptionPane.showMessageDialog(rootPane, "Produto salvo com sucesso!");
         
         //zerar campos para novo cadastro
         campo_nome.setText("");
         campo_codigo.setText("");
         campo_valor.setText("");
+        ProdutoDAO.save(Produto);
         lerJTable();
         }
+        
         }catch(NumberFormatException e){
-            JOptionPane.showMessageDialog(null, "numberformatException");
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+        }catch(Exception e){
+           JOptionPane.showMessageDialog(null, "nah"); 
+        }
         }
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-        //teste de recebimento do valor de codigo para alteração
-       System.out.println(campo_codigo.getText());
+       
+        try{
        ProdutoModel Produto = new ProdutoModel();
        ProdutoDAO produtoDAO = new ProdutoDAO();
+       
+       String nome_campo = (jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 0).toString());
+       double valor_campo = Double.parseDouble( jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
+       
        Produto.setNome_produto(campo_nome.getText());
        Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
        Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
+       
+       // comparando as strings do nome para verificar se os nomes continuam iguais
+       if ((Produto.getNome_produto() == null ? nome_campo == null : Produto.getNome_produto().equals(nome_campo)) && (Produto.getValor_Produto()) == valor_campo){
+           System.out.println("nenhuma alteração");
+           JOptionPane.showMessageDialog(null, "nenhuma alteração");
+       }else{
+       
        produtoDAO.atualizar(Produto);
        JOptionPane.showMessageDialog(null, "Atualizado com sucesso");
        lerJTable();
-            
+       }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null,"Selecione um produto a ser alterado");
+        }
+        
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
@@ -356,6 +382,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         campo_nome.setText("");
         campo_codigo.setText("");
         campo_valor.setText("");
+        campo_codigo.setEditable(true);
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
