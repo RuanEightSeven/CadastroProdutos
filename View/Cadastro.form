@@ -32,7 +32,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="150" max="-2" attributes="0"/>
@@ -46,7 +46,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="campo_usuario" pref="147" max="32767" attributes="0"/>
+                          <Component id="campo_user" pref="147" max="32767" attributes="0"/>
                           <Component id="campo_senha" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -56,6 +56,11 @@
                   </Group>
               </Group>
               <EmptySpace pref="101" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" pref="91" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -67,7 +72,7 @@
               <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="campo_usuario" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="campo_user" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -76,7 +81,9 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="btcadastrar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="121" max="32767" attributes="0"/>
+              <EmptySpace pref="92" max="32767" attributes="0"/>
+              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -101,7 +108,7 @@
         <Property name="text" type="java.lang.String" value="Senha:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="campo_usuario">
+    <Component class="javax.swing.JTextField" name="campo_user">
     </Component>
     <Component class="javax.swing.JTextField" name="campo_senha">
     </Component>
@@ -111,6 +118,14 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btcadastrarMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="jButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Entrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
       </Events>
     </Component>
   </SubComponents>

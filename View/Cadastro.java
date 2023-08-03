@@ -6,6 +6,7 @@ package View;
 
 import Model.LoginDAO;
 import Model.LoginModel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,9 +35,10 @@ public class Cadastro extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        campo_usuario = new javax.swing.JTextField();
+        campo_user = new javax.swing.JTextField();
         campo_senha = new javax.swing.JTextField();
         btcadastrar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 51, 255));
@@ -58,6 +60,13 @@ public class Cadastro extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Entrar");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,12 +83,16 @@ public class Cadastro extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(campo_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                            .addComponent(campo_user, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
                             .addComponent(campo_senha)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(btcadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(101, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -89,14 +102,16 @@ public class Cadastro extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campo_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campo_user, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(campo_senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btcadastrar)
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         pack();
@@ -106,19 +121,30 @@ public class Cadastro extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         try{
+            
         LoginModel login = new LoginModel();
         LoginDAO loginDAO = new LoginDAO();
-        
-        login.setUsuario(campo_usuario.toString());
-        login.setSenha(campo_senha.toString());
-        
+        login.setUsuario(campo_user.getText());
+        login.setSenha(campo_senha.getText());
         loginDAO.save(login);
-        }catch(Exception e ){
-            
+        
+        JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+        campo_user.setText("");
+        campo_senha.setText("");
+        
+        }catch(Exception e){
+            throw e;
         }
         
-        
     }//GEN-LAST:event_btcadastrarMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        
+        Login login = new Login();
+        login.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -159,7 +185,8 @@ public class Cadastro extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btcadastrar;
     private javax.swing.JTextField campo_senha;
-    private javax.swing.JTextField campo_usuario;
+    private javax.swing.JTextField campo_user;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

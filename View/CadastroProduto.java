@@ -339,17 +339,21 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         // TODO add your handling code here:
-       
-        try{
-       ProdutoModel Produto = new ProdutoModel();
-       ProdutoDAO produtoDAO = new ProdutoDAO();
-       
-       String nome_campo = (jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 0).toString());
-       double valor_campo = Double.parseDouble( jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
-       
-       Produto.setNome_produto(campo_nome.getText());
-       Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
-       Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
+        
+      
+            try{
+            
+            
+                    
+                ProdutoModel Produto = new ProdutoModel();
+                ProdutoDAO produtoDAO = new ProdutoDAO();
+
+                String nome_campo = (jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 0).toString());
+                double valor_campo = Double.parseDouble( jTProdutos.getValueAt(jTProdutos.getSelectedRow(), 2).toString());
+
+                Produto.setNome_produto(campo_nome.getText());
+                Produto.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
+                Produto.setValor_Produto( Double.parseDouble(campo_valor.getText()));
        
        // comparando as strings do nome para verificar se os nomes continuam iguais
        if ((Produto.getNome_produto() == null ? nome_campo == null : Produto.getNome_produto().equals(nome_campo)) && (Produto.getValor_Produto()) == valor_campo){
@@ -364,7 +368,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         }catch(Exception e){
             JOptionPane.showMessageDialog(null,"Selecione um produto a ser alterado");
         }
-        
+    
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jButton3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseEntered
@@ -373,16 +377,30 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
-        ProdutoDAO pdao = new ProdutoDAO();
-        ProdutoModel produtodelete = new ProdutoModel();
-        produtodelete.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
-        pdao.delete(produtodelete);
-        JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
-        lerJTable();
-        campo_nome.setText("");
-        campo_codigo.setText("");
-        campo_valor.setText("");
-        campo_codigo.setEditable(true);
+        try{
+            ProdutoDAO pdao = new ProdutoDAO();
+            ProdutoModel produtodelete = new ProdutoModel();
+        
+        if (campo_codigo.isEditable() == false){
+            
+            produtodelete.setCodigo_Produto(Integer.parseInt(campo_codigo.getText()));
+            pdao.delete(produtodelete);
+            JOptionPane.showMessageDialog(null, "Excluído com sucesso!");
+            lerJTable();
+            campo_nome.setText("");
+            campo_codigo.setText("");
+            campo_valor.setText("");
+            campo_codigo.setEditable(true);
+            
+        }
+        
+        else{
+            JOptionPane.showMessageDialog(null, "Produto não selecionado/cadastrado!" );
+        }
+        
+        }catch(Exception e){
+            System.out.println("não ta podendo");
+        }
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

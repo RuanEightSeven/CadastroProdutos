@@ -7,6 +7,7 @@ import Connection.ConnectionFactory;
 import Model.ProdutoDAO;
 import Model.ProdutoModel;
 import View.CadastroProduto;
+import View.Login;
 
 /**
  *
@@ -19,7 +20,7 @@ import View.CadastroProduto;
      */
     public static void main(String[] args) throws Exception {
         // TODO code application logic here
-        new CadastroProduto().setVisible(true);
+        new Login().setVisible(true);
         
         
         
